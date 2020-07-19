@@ -26,7 +26,7 @@ const coursesData = [
         date: '28.03.2019'
     },
     {
-        name: 'Эффективный тайм - менеджмент для специалиста с использованием Microsoft Outlook 2019/2016',
+        name: '	Эффективный тайм - менеджмент для специалиста с использованием Microsoft Outlook 2019/2016',
         date: '27.05.2019'
     },
     {
@@ -48,6 +48,11 @@ const table = {
     currentPage: 1,
     tableBody: $("#mainTableBody"),
     numberOfRows: 3,
+    isSortedByName: false,
+    isSortedByDate: false,
+    sortByName: function () {
+        this.data.sort(compareByName);
+    },
     renderFirstRow: function ({name, date}) {
         return this.tableBody.html("<tr><td>" + name + "</td><td>" + date + "</td></tr>");
     },
@@ -57,6 +62,9 @@ const table = {
     renderTable: function (courses) {
         let firstRow = (this.currentPage - 1) * this.numberOfRows;
         let secondRow = (this.currentPage - 1) * this.numberOfRows + 1;
+        if (this.isSortedByName) {
+            this.sortByName();
+        }
         this.renderFirstRow(courses[firstRow]);
         for (let i = secondRow; i < (firstRow + this.numberOfRows); i++) {
             if (courses[i]) {
@@ -68,14 +76,27 @@ const table = {
 }
 
 const navigation = {
-   pageNumbers: document.querySelectorAll(".page-number")
+    pageNumbers: document.querySelectorAll(".page-number")
 }
 
 $(table.renderTable(table.data));
 
 navigation.pageNumbers.forEach(page => page.addEventListener("click", processPageNumber));
+$("#column-name").on("click", processNameSorting);
 
 function processPageNumber() {
     table.currentPage = $(this).text();
     table.renderTable(table.data);
+}
+
+function processNameSorting() {
+    table.isSortedByDate = false;
+    table.isSortedByName = !table.isSortedByName;
+    table.renderTable(table.data);
+}
+
+function compareByName(a, b) {
+    if (a.name > b.name) return 1;
+    else if (a.name < b.name) return -1;
+    else return 0;
 }
