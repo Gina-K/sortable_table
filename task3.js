@@ -43,10 +43,9 @@ const coursesData = [
     }
 ];
 
-
 const table = {
     data: coursesData,
-    currentPage: 4,
+    currentPage: 1,
     tableBody: $("#mainTableBody"),
     numberOfRows: 3,
     renderFirstRow: function ({name, date}) {
@@ -68,8 +67,15 @@ const table = {
     }
 }
 
-// const navigation = {
-//    pageNumbers: document.
-// }
+const navigation = {
+   pageNumbers: document.querySelectorAll(".page-number")
+}
 
-table.renderTable(table.data);
+$(table.renderTable(table.data));
+
+navigation.pageNumbers.forEach(page => page.addEventListener("click", processPageNumber));
+
+function processPageNumber() {
+    table.currentPage = $(this).text();
+    table.renderTable(table.data);
+}
