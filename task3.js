@@ -66,6 +66,7 @@ const table = {
     renderTable: function () {
         let firstRow = (this.currentPage - 1) * this.numberOfRows;
         let secondRow = (this.currentPage - 1) * this.numberOfRows + 1;
+        navigation.setCurrentPageIndex();
         if (!this.needSortByName && !this.needSortByDate) {
             this.data = coursesData.slice();
         } else if (this.needSortByName) {
@@ -85,7 +86,11 @@ const table = {
 }
 
 const navigation = {
-    pageNumbers: document.querySelectorAll(".page-number")
+    pageNumbers: document.querySelectorAll(".page-number"),
+    pageIndexContainer: $("#page-index"),
+    setCurrentPageIndex: function() {
+        this.pageIndexContainer.html(table.currentPage);
+    }
 }
 
 $(table.renderTable(table.data));
