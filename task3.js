@@ -44,7 +44,8 @@ const coursesData = [
 ];
 
 const table = {
-    data: coursesData.slice(),
+    // data: coursesData.slice(),
+    data: [],
     currentPage: 1,
     tableBody: $("#mainTableBody"),
     numberOfRows: 3,
@@ -65,11 +66,14 @@ const table = {
     renderTable: function () {
         let firstRow = (this.currentPage - 1) * this.numberOfRows;
         let secondRow = (this.currentPage - 1) * this.numberOfRows + 1;
-        if (this.needSortByName) {
+        if (!this.needSortByName && !this.needSortByDate) {
+            this.data = coursesData.slice();
+        } else if (this.needSortByName) {
             this.sortByName();
         } else {
-            this.data = coursesData.slice();
+            this.sortByDate();
         }
+
         this.renderFirstRow(this.data[firstRow]);
         for (let i = secondRow; i < (firstRow + this.numberOfRows); i++) {
             if (this.data[i]) {
@@ -88,6 +92,7 @@ $(table.renderTable(table.data));
 
 navigation.pageNumbers.forEach(page => page.addEventListener("click", processPageNumber));
 $("#column-name").on("click", processNameSorting);
+$("#column-date").on("click", processDateSorting);
 
 function processPageNumber() {
     table.currentPage = $(this).text();
@@ -98,6 +103,13 @@ function processNameSorting() {
     table.needSortByDate = false;
     table.currentPage = 1;
     table.needSortByName = !table.needSortByName;
+    table.renderTable(table.data);
+}
+
+function processDateSorting() {
+    table.needSortByName = false;
+    table.currentPage = 1;
+    table.needSortByDate = !table.needSortByDate;
     table.renderTable(table.data);
 }
 
@@ -114,6 +126,3 @@ function compareByDate(a, b) {
     else if (dateA < dateB) return -1;
     else return 0;
 }
-
-
-console.log(table.data.sort(compareByDate));
