@@ -48,28 +48,25 @@ const table = {
     currentPage: 1,
     tableBody: $("#mainTableBody"),
     numberOfRows: 3,
-    isSortedByName: false,
-    isSortedByDate: false,
+    needSortByName: false,
+    needSortByDate: false,
     sortByName: function () {
         this.data.sort(compareByName);
     },
     renderFirstRow: function ({name, date}) {
-        console.log(name + " " + date);
         return this.tableBody.html("<tr><td>" + name + "</td><td>" + date + "</td></tr>");
     },
     renderSubsequentRow: function ({name, date}) {
         return this.tableBody.append("<tr><td>" + name + "</td><td>" + date + "</td></tr>");
     },
-    renderTable: function (courses) {
+    renderTable: function () {
         let firstRow = (this.currentPage - 1) * this.numberOfRows;
         let secondRow = (this.currentPage - 1) * this.numberOfRows + 1;
-        if (this.isSortedByName) {
+        if (this.needSortByName) {
             this.sortByName();
         } else {
             this.data = coursesData.slice();
         }
-        console.log(this.data);
-        console.log(this.isSortedByName);
         this.renderFirstRow(this.data[firstRow]);
         for (let i = secondRow; i < (firstRow + this.numberOfRows); i++) {
             if (this.data[i]) {
@@ -95,9 +92,9 @@ function processPageNumber() {
 }
 
 function processNameSorting() {
-    table.isSortedByDate = false;
+    table.needSortByDate = false;
     table.currentPage = 1;
-    table.isSortedByName = !table.isSortedByName;
+    table.needSortByName = !table.needSortByName;
     table.renderTable(table.data);
 }
 
