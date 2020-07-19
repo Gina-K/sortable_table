@@ -46,7 +46,7 @@ const coursesData = [
 
 const table = {
     data: coursesData,
-    currentPage: 2,
+    currentPage: 4,
     tableBody: $("#mainTableBody"),
     numberOfRows: 3,
     renderFirstRow: function ({name, date}) {
@@ -59,31 +59,17 @@ const table = {
         let firstRow = (this.currentPage - 1) * this.numberOfRows;
         let secondRow = (this.currentPage - 1) * this.numberOfRows + 1;
         this.renderFirstRow(courses[firstRow]);
-        for (let i = secondRow; i < this.numberOfRows; i++) {
-            this.renderSubsequentRow(courses[i]);
+        for (let i = secondRow; i < (firstRow + this.numberOfRows); i++) {
+            if (courses[i]) {
+                this.renderSubsequentRow(courses[i]);
+            }
         }
         return true;
     }
 }
 
-table.renderFirstRow({name: "Событие 12", date: "25.08.2019"});
-table.renderSubsequentRow({name: "Событие 22", date: "25.08.2019"});
-table.renderSubsequentRow({name: "Событие 32", date: "25.08.2019"});
+// const navigation = {
+//    pageNumbers: document.
+// }
 
-table.renderTable([{
-    name: 'Противодействие коррупции',
-    date: '28.02.2018'
-},
-    {
-        name: 'Обучение JS. Часть 1',
-        date: '27.02.2018'
-    },
-    {
-        name: 'Рекурсивные запросы MS SQL Server 2012',
-        date: '02.02.2019'
-    },
-    {
-        name: 'Управление IT-инфраструктурой (ITSM)',
-        date: '11.05.1992'
-    }
-]);
+table.renderTable(table.data);
