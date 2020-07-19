@@ -53,6 +53,9 @@ const table = {
     sortByName: function () {
         this.data.sort(compareByName);
     },
+    sortByDate: function () {
+        this.data.sort(compareByDate);
+    },
     renderFirstRow: function ({name, date}) {
         return this.tableBody.html("<tr><td>" + name + "</td><td>" + date + "</td></tr>");
     },
@@ -103,3 +106,14 @@ function compareByName(a, b) {
     else if (a.name < b.name) return -1;
     else return 0;
 }
+
+function compareByDate(a, b) {
+    let dateA = Date.parse(a.date.split(".").reverse().join("-"));
+    let dateB = Date.parse(b.date.split(".").reverse().join("-"));
+    if (dateA > dateB) return 1;
+    else if (dateA < dateB) return -1;
+    else return 0;
+}
+
+
+console.log(table.data.sort(compareByDate));
