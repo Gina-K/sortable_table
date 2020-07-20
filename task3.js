@@ -44,13 +44,21 @@ const coursesData = [
 ];
 
 const table = {
-    // data: coursesData.slice(),
     data: [],
     currentPage: 1,
     tableBody: $("#mainTableBody"),
     numberOfRows: 3,
     needSortByName: false,
     needSortByDate: false,
+    highlightSorting: function () {
+        $("#column-name").removeClass("active-sort");
+        $("#column-date").removeClass("active-sort");
+        if (this.needSortByName) {
+            $("#column-name").addClass("active-sort");
+        } else if (this.needSortByDate) {
+            $("#column-date").addClass("active-sort")
+        }
+    },
     sortByName: function () {
         this.data.sort(compareByName);
     },
@@ -63,10 +71,12 @@ const table = {
     renderSubsequentRow: function ({name, date}) {
         return this.tableBody.append("<tr><td>" + name + "</td><td>" + date + "</td></tr>");
     },
-    renderTable: function () {
+    render: function () {
         let firstRow = (this.currentPage - 1) * this.numberOfRows;
         let secondRow = (this.currentPage - 1) * this.numberOfRows + 1;
         navigation.setCurrentPageIndex();
+        navigation.highlightCurrentPage();
+        this.highlightSorting();
         if (!this.needSortByName && !this.needSortByDate) {
             this.data = coursesData.slice();
         } else if (this.needSortByName) {
@@ -90,10 +100,14 @@ const navigation = {
     pageIndexContainer: $("#page-index"),
     setCurrentPageIndex: function() {
         this.pageIndexContainer.html(table.currentPage);
+    },
+    highlightCurrentPage: function () {
+        $("nav li").removeClass("current-page");
+        $("nav li:contains(" + table.currentPage + ")").addClass("current-page");
     }
 }
 
-$(table.renderTable(table.data));
+$(table.render(table.data));
 
 navigation.pageNumbers.forEach(page => page.addEventListener("click", processPageNumber));
 $("#column-name").on("click", processNameSorting);
@@ -101,21 +115,21 @@ $("#column-date").on("click", processDateSorting);
 
 function processPageNumber() {
     table.currentPage = $(this).text();
-    table.renderTable(table.data);
+    table.render(table.data);
 }
 
 function processNameSorting() {
     table.needSortByDate = false;
     table.currentPage = 1;
     table.needSortByName = !table.needSortByName;
-    table.renderTable(table.data);
+    table.render(table.data);
 }
 
 function processDateSorting() {
     table.needSortByName = false;
     table.currentPage = 1;
     table.needSortByDate = !table.needSortByDate;
-    table.renderTable(table.data);
+    table.render(table.data);
 }
 
 function compareByName(a, b) {

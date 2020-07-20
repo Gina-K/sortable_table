@@ -63,6 +63,12 @@ nav li {
     cursor: pointer;
 }
 
-.active {
+.current-page,
+.active-sort {
     color: #278AE2;
+}
+
+.current-page {
+    color: #278AE2;
+    cursor: auto;
 }
