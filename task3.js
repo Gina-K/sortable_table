@@ -51,12 +51,14 @@ const table = {
     needSortByName: false,
     needSortByDate: false,
     highlightSorting: function () {
-        $("#column-name").removeClass("active-sort");
-        $("#column-date").removeClass("active-sort");
+        let title = $("#column-name");
+        let date = $("#column-date");
+        title.removeClass("active-sort");
+        date.removeClass("active-sort");
         if (this.needSortByName) {
-            $("#column-name").addClass("active-sort");
+            title.addClass("active-sort");
         } else if (this.needSortByDate) {
-            $("#column-date").addClass("active-sort")
+            date.addClass("active-sort")
         }
     },
     sortByName: function () {
