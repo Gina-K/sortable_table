@@ -1,0 +1,68 @@
+html {
+    box-sizing: border-box;
+}
+
+*,
+*:before,
+*:after {
+    box-sizing: inherit;
+}
+
+body {
+    margin: 0;
+    font-family: 'Fira Sans', Arial, sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 1.5;
+}
+
+main {
+    margin: 0 auto;
+    padding: 20px;
+    max-width: 1024px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th {
+    font-weight: 500;
+    padding: 16px;
+    cursor: pointer;
+}
+
+td {
+    padding: 12px;
+    vertical-align: top;
+}
+
+td:last-child {
+    width: 25%;
+    text-align: center;
+}
+
+table,
+th,
+td {
+    border: 1px solid gray;
+}
+
+nav ul {
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+    margin: 16px 0;
+    padding: 0;
+    list-style-type: none;
+}
+
+nav li {
+    padding: 8px;
+    cursor: pointer;
+}
+
+.active {
+    color: #278AE2;
+}

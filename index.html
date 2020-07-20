@@ -4,37 +4,35 @@
   <meta charset="UTF-8">
   <title>Тестовое задание. Задача 3</title>
 
+  <link rel="stylesheet" href="styles.css">
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Sans:wght@400;500&display=swap" rel="stylesheet">
+
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-
-  <style>
-    table,
-    th,
-    td {
-      border: 1px solid gray;
-    }
-  </style>
 </head>
-<body>
-<nav>
-  <ul>
-    <li class="page-number">1</li>
-    <li class="page-number">2</li>
-    <li class="page-number">3</li>
-    <li class="page-number">4</li>
-  </ul>
-</nav>
-<table>
-  <thead>
-  <tr>
-    <th id="column-name">Название курса</th>
-    <th id="column-date">Дата проведения</th>
-  </tr>
-  </thead>
-  <tbody id="mainTableBody">
-  </tbody>
 
-</table>
-<p>Страница <span id="page-index"></span></p>
+<body>
+<main>
+  <nav>
+    <ul>
+      <li class="page-number">1</li>
+      <li class="page-number">2</li>
+      <li class="page-number">3</li>
+      <li class="page-number">4</li>
+    </ul>
+  </nav>
+  <table>
+    <thead>
+    <tr>
+      <th id="column-name" title="Вкл/выкл сортировку по имени, по возрастанию">Название курса</th>
+      <th id="column-date" title="Вкл/выкл сортировку по дате, по возрастанию">Дата проведения</th>
+    </tr>
+    </thead>
+    <tbody id="mainTableBody">
+    </tbody>
+
+  </table>
+  <p>Страница <span id="page-index"></span></p>
+</main>
 <script src="task3.js"></script>
 </body>
 </html>
