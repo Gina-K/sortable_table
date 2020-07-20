@@ -44,7 +44,7 @@ const coursesData = [
 ];
 
 const table = {
-    data: [],
+    data: coursesData.slice(),
     currentPage: 1,
     tableBody: $("#mainTableBody"),
     numberOfRows: 3,
@@ -98,7 +98,7 @@ const table = {
 }
 
 const navigation = {
-    pageNumbers: document.querySelectorAll(".page-number"),
+    numberOfPages: Math.ceil(table.data.length / table.numberOfRows),
     pageIndexContainer: $("#page-index"),
     setCurrentPageIndex: function() {
         this.pageIndexContainer.html(table.currentPage);
@@ -106,12 +106,22 @@ const navigation = {
     highlightCurrentPage: function () {
         $("nav li").removeClass("current-page");
         $("nav li:contains(" + table.currentPage + ")").addClass("current-page");
+    },
+    renderNav: function () {
+      for (let i = 1; i <= this.numberOfPages; i++) {
+        $("nav ul").append("<li class='page-number'>" + i + "</li>");
+      }
     }
 }
 
-$(table.render(table.data));
+$(init());
 
-navigation.pageNumbers.forEach(page => page.addEventListener("click", processPageNumber));
+function init() {
+  navigation.renderNav();
+  table.render(table.data);
+  document.querySelectorAll(".page-number").forEach(page => page.addEventListener("click", processPageNumber));
+}
+
 $("#column-name").on("click", processNameSorting);
 $("#column-date").on("click", processDateSorting);
 
