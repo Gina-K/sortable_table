@@ -145,8 +145,10 @@ function processDateSorting() {
 }
 
 function compareByName(a, b) {
-    if (a.name > b.name) return 1;
-    else if (a.name < b.name) return -1;
+    let aTrimed = a.name.trim();
+    let bTrimed = b.name.trim();
+    if (aTrimed > bTrimed) return 1;
+    else if (aTrimed < bTrimed) return -1;
     else return 0;
 }
 

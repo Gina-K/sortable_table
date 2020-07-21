@@ -1,0 +1,18 @@
+{
+  "name": "task3",
+  "version": "1.0.0",
+  "main": "index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "lite-server"
+  },
+  "author": "Eugenia Kurmeneva",
+  "license": "ISC",
+  "dependencies": {
+    "jquery": "^3.5.1"
+  },
+  "devDependencies": {
+    "lite-server": "^2.5.4"
+  },
+  "description": ""
+}
