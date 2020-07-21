@@ -104,8 +104,8 @@ const navigation = {
     this.pageIndexContainer.html(table.currentPage);
   },
   highlightCurrentPage: function () {
-    $("nav li").removeClass("current-page");
-    $("nav li:contains(" + table.currentPage + ")").addClass("current-page");
+    $("#page-numbers li").removeClass("current-page");
+    $("#page-numbers li:contains(" + table.currentPage + ")").addClass("current-page");
   },
   renderNav: function () {
     for (let i = 1; i <= this.numberOfPages; i++) {
