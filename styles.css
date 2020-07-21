@@ -58,17 +58,20 @@ nav ul {
     list-style-type: none;
 }
 
-#page-numbers {
-
-}
-
 nav li {
     padding: 8px;
     cursor: pointer;
 }
 
+#to-previous-page:hover,
+#to-next-page:hover,
+.page-number:hover {
+    color: gray;
+}
+
 .current-page,
-.active-sort {
+.active-sort,
+.current-page:hover {
     color: #278AE2;
 }
 
