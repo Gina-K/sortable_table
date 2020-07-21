@@ -52,10 +52,14 @@ td {
 nav ul {
     display: flex;
     justify-content: flex-end;
-    width: 100%;
+    align-items: baseline;
     margin: 16px 0;
     padding: 0;
     list-style-type: none;
+}
+
+#page-numbers {
+
 }
 
 nav li {
